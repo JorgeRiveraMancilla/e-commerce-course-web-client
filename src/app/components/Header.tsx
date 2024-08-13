@@ -46,7 +46,10 @@ interface Props {
 
 export const Header = ({ handleThemeChange, darkMode }: Props) => {
   const { basket } = useAppSelector((state) => state.basket);
-  const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0);
+  const itemCount = basket?.items?.reduce(
+    (sum, item) => sum + item.quantity,
+    0
+  );
 
   const [anchorUserMenu, setAnchorUserMenu] = useState<null | HTMLElement>(
     null

@@ -11,8 +11,10 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import StoreIcon from "@mui/icons-material/Store";
 import { useState, MouseEvent } from "react";
-import { Switch } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Badge, Switch } from "@mui/material";
+import { Link, NavLink } from "react-router-dom";
+import { ShoppingCart } from "@mui/icons-material";
+import { useAppSelector } from "../store/configureStore";
 
 const mainTitle = "E-COMMERCE";
 const leftLinks = [
@@ -43,6 +45,9 @@ interface Props {
 }
 
 export const Header = ({ handleThemeChange, darkMode }: Props) => {
+  const { basket } = useAppSelector((state) => state.basket);
+  const itemCount = basket?.items.reduce((sum, item) => sum + item.quantity, 0);
+
   const [anchorUserMenu, setAnchorUserMenu] = useState<null | HTMLElement>(
     null
   );
@@ -85,6 +90,18 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
               </Button>
             ))}
           </Box>
+
+          <IconButton
+            component={Link}
+            to="/basket"
+            size="large"
+            edge="start"
+            color="inherit"
+          >
+            <Badge badgeContent={itemCount} color="secondary">
+              <ShoppingCart />
+            </Badge>
+          </IconButton>
 
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             {rightLinks.map(({ title, path }) => (

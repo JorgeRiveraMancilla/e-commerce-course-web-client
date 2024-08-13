@@ -12,6 +12,7 @@ import { fetchCurrentUser } from "./store/slices/accountSlice";
 import { fetchBasketAsync } from "./store/slices/basketSlice";
 import { Loading } from "./components/Loading";
 import { Header } from "./components/Header";
+import "react-toastify/dist/ReactToastify.css";
 
 export const AppPage = () => {
   const dispatch = useAppDispatch();

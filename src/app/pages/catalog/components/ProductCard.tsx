@@ -11,7 +11,9 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Product } from "../../../models/product";
-import { useAppSelector } from "../../../store/configureStore";
+import { useAppDispatch, useAppSelector } from "../../../store/configureStore";
+import { addBasketItemAsync } from "../../../store/slices/basketSlice";
+import { formatChileanCurrency } from "../../../utils/util";
 
 interface Props {
   product: Product;
@@ -19,6 +21,7 @@ interface Props {
 
 export const ProductCard = ({ product }: Props) => {
   const { status } = useAppSelector((state) => state.basket);
+  const dispatch = useAppDispatch();
 
   return (
     <Card>
@@ -46,7 +49,7 @@ export const ProductCard = ({ product }: Props) => {
 
       <CardContent>
         <Typography gutterBottom color="secondary" variant="h5" component="div">
-          {product.price}
+          {formatChileanCurrency(product.price)}
         </Typography>
 
         <Typography variant="body2" color="text.secondary">
@@ -57,17 +60,16 @@ export const ProductCard = ({ product }: Props) => {
       <CardActions>
         <LoadingButton
           loading={status === "pendingAddItem" + product.id}
-          //   TODO: Uncomment this line to add the product to the basket
-          //   onClick={() =>
-          //     dispatch(addBasketItemAsync({ productId: product.id }))
-          //   }
+          onClick={() =>
+            dispatch(addBasketItemAsync({ productId: product.id }))
+          }
           size="small"
         >
-          Add to Cart
+          Añadir al carro
         </LoadingButton>
 
         <Button component={Link} to={`/catalog/${product.id}`} size="small">
-          View
+          Ver
         </Button>
       </CardActions>
     </Card>

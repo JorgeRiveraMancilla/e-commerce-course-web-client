@@ -23,9 +23,9 @@ import { CheckboxButtons } from "../../components/CheckboxButtons";
 import { Loading } from "../../components/Loading";
 
 const sortOptions = [
-  { value: "name", label: "Alphabetical" },
-  { value: "priceDesc", label: "Price - High to low" },
-  { value: "price", label: "Price - Low to high" },
+  { value: "name", label: "Alfabético" },
+  { value: "price-desc", label: "Precio de mayor a menor" },
+  { value: "price-asc", label: "Precio de menor a mayor" },
 ];
 
 export const CatalogPage = () => {
@@ -60,7 +60,7 @@ export const CatalogPage = () => {
   );
 
   const handlePageChange = (page: number) => {
-    dispatch(setPageNumber(page));
+    dispatch(setPageNumber({ pageNumber: page }));
   };
 
   const handleSearchProducts = (

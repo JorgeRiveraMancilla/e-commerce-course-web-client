@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import agent from "../../api/agent";
 import { Basket } from "../../models/basket";
 import { AxiosError, AxiosResponse } from "axios";
+import { getCookie } from "../../utils/util";
 
 export interface BasketState {
   basket: Basket | null;
@@ -12,11 +13,6 @@ const initialState: BasketState = {
   basket: null,
   status: "idle",
 };
-
-export function getCookie(key: string) {
-  const b = document.cookie.match("(^|;)\\s*" + key + "\\s*=\\s*([^;]+)");
-  return b ? b.pop() : "";
-}
 
 export const fetchBasketAsync = createAsyncThunk<Basket>(
   "basket/fetchBasketAsync",

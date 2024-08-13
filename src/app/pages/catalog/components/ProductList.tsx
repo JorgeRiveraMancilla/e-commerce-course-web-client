@@ -14,10 +14,10 @@ export const ProductList = ({ products }: Props) => {
     <Grid container spacing={4}>
       {products.map((product) => (
         <Grid item xs={4} key={product.id}>
-          {!productsLoaded ? (
-            <ProductCardSkeleton />
-          ) : (
+          {productsLoaded ? (
             <ProductCard product={product} />
+          ) : (
+            <ProductCardSkeleton />
           )}
         </Grid>
       ))}

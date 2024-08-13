@@ -23,6 +23,10 @@ export const ProductCard = ({ product }: Props) => {
   const { status } = useAppSelector((state) => state.basket);
   const dispatch = useAppDispatch();
 
+  const handleAddItem = (productId: number) => {
+    dispatch(addBasketItemAsync({ productId }));
+  };
+
   return (
     <Card>
       <CardHeader
@@ -60,14 +64,11 @@ export const ProductCard = ({ product }: Props) => {
       <CardActions>
         <LoadingButton
           loading={status === "pendingAddItem" + product.id}
-          onClick={() =>
-            dispatch(addBasketItemAsync({ productId: product.id }))
-          }
+          onClick={() => handleAddItem(product.id)}
           size="small"
         >
           Añadir al carro
         </LoadingButton>
-
         <Button component={Link} to={`/catalog/${product.id}`} size="small">
           Ver
         </Button>

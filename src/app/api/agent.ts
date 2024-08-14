@@ -53,7 +53,7 @@ axios.interceptors.response.use(
         toast.error(data.title);
         break;
       case 403:
-        toast.error("You are not allowed to do that!");
+        toast.error("No puedes realizar esta acción.");
         break;
       case 500:
         router.navigate("/server-error", { state: { error: data } });
@@ -91,7 +91,7 @@ const Basket = {
 const Account = {
   login: (values: object) => requests.post("account/login", values),
   register: (values: object) => requests.post("account/register", values),
-  currentUser: () => requests.get("account/currentUser"),
+  currentUser: () => requests.get("account/current-user"),
   fetchAddress: () => requests.get("account/savedAddress"),
 };
 

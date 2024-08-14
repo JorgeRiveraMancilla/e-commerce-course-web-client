@@ -46,6 +46,8 @@ interface Props {
 
 export const Header = ({ handleThemeChange, darkMode }: Props) => {
   const { basket } = useAppSelector((state) => state.basket);
+  const { user } = useAppSelector((state) => state.account);
+
   const itemCount = basket?.items?.reduce(
     (sum, item) => sum + item.quantity,
     0
@@ -67,7 +69,9 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar>
-          <StoreIcon sx={{ mr: 1 }} />
+          <IconButton color="inherit" component={NavLink} to="/">
+            <StoreIcon />
+          </IconButton>
 
           <Typography
             component={NavLink}
@@ -79,7 +83,7 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              mr: 2,
+              mx: 2,
               textDecoration: "none",
             }}
           >
@@ -106,49 +110,56 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
             </Badge>
           </IconButton>
 
-          <Box sx={{ flexGrow: 0, display: "flex" }}>
-            {rightLinks.map(({ title, path }) => (
-              <Button key={title} component={NavLink} to={path} sx={linkStyles}>
-                {title}
-              </Button>
-            ))}
-          </Box>
+          {user ? (
+            <Box sx={{ flexGrow: 0, mx: 1 }}>
+              <Tooltip title="Abrir configuración">
+                <IconButton
+                  onClick={(event: MouseEvent<HTMLElement>) =>
+                    handleOpenUserMenu(event)
+                  }
+                  sx={{ p: 0 }}
+                >
+                  <Avatar />
+                </IconButton>
+              </Tooltip>
 
-          <Box sx={{ flexGrow: 0, mx: 1 }}>
-            <Tooltip title="Abrir configuración">
-              <IconButton
-                onClick={(event: MouseEvent<HTMLElement>) =>
-                  handleOpenUserMenu(event)
-                }
-                sx={{ p: 0 }}
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorUserMenu}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorUserMenu)}
+                onClose={() => handleCloseUserMenu()}
               >
-                <Avatar />
-              </IconButton>
-            </Tooltip>
-
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorUserMenu}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorUserMenu)}
-              onClose={() => handleCloseUserMenu()}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={() => handleCloseUserMenu()}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={() => handleCloseUserMenu()}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          ) : (
+            <Box sx={{ flexGrow: 0, display: "flex" }}>
+              {rightLinks.map(({ title, path }) => (
+                <Button
+                  key={title}
+                  component={NavLink}
+                  to={path}
+                  sx={linkStyles}
+                >
+                  {title}
+                </Button>
               ))}
-            </Menu>
-          </Box>
+            </Box>
+          )}
 
           <Switch checked={darkMode} onChange={handleThemeChange} />
         </Toolbar>

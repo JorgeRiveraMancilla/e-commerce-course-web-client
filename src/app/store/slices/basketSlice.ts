@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import agent from "../../api/agent";
 import { Basket } from "../../models/basket";
-import { AxiosError, AxiosResponse } from "axios";
 import { getCookie } from "../../utils/util";
 
 export interface BasketState {
@@ -20,9 +19,7 @@ export const fetchBasketAsync = createAsyncThunk<Basket>(
     try {
       return await agent.Basket.get();
     } catch (error: unknown) {
-      const axiosError = error as AxiosError;
-      const { data } = axiosError.response as AxiosResponse;
-      return thunkAPI.rejectWithValue(data);
+      return thunkAPI.rejectWithValue(error);
     }
   },
   {
@@ -41,9 +38,7 @@ export const addBasketItemAsync = createAsyncThunk<
     try {
       return await agent.Basket.addItem(productId, quantity);
     } catch (error: unknown) {
-      const axiosError = error as AxiosError;
-      const { data } = axiosError.response as AxiosResponse;
-      return thunkAPI.rejectWithValue(data);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -55,9 +50,7 @@ export const removeBasketItemAsync = createAsyncThunk<
   try {
     await agent.Basket.removeItem(productId, quantity);
   } catch (error: unknown) {
-    const axiosError = error as AxiosError;
-    const { data } = axiosError.response as AxiosResponse;
-    return thunkAPI.rejectWithValue(data);
+    return thunkAPI.rejectWithValue(error);
   }
 });
 

@@ -8,7 +8,6 @@ import { MetaData } from "../../models/metaData";
 import { Product } from "../../models/product";
 import { ProductParams } from "../../models/productParams";
 import { RootState } from "../configureStore";
-import { AxiosError, AxiosResponse } from "axios";
 
 export interface ProductState {
   productsLoaded: boolean;
@@ -53,9 +52,7 @@ export const fetchProductsAsync = createAsyncThunk<
     thunkAPI.dispatch(setMetaData(response.metaData));
     return response.items;
   } catch (error: unknown) {
-    const axiosError = error as AxiosError;
-    const { data } = axiosError.response as AxiosResponse;
-    return thunkAPI.rejectWithValue(data);
+    return thunkAPI.rejectWithValue(error);
   }
 });
 
@@ -66,23 +63,18 @@ export const fetchProductAsync = createAsyncThunk<Product, number>(
       const product = await agent.Product.getOne(productId);
       return product;
     } catch (error: unknown) {
-      const axiosError = error as AxiosError;
-      const { data } = axiosError.response as AxiosResponse;
-      return thunkAPI.rejectWithValue(data);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
 export const fetchFiltersAsync = createAsyncThunk(
-  "product/fetchFilters",
+  "product/fetchFiltersAsync",
   async (_, thunkAPI) => {
     try {
       return agent.Product.getFilters();
     } catch (error: unknown) {
-      console.log(error);
-      const axiosError = error as AxiosError;
-      const { data } = axiosError.response as AxiosResponse;
-      return thunkAPI.rejectWithValue(data);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );

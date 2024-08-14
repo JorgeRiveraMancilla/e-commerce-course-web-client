@@ -5,7 +5,6 @@ import agent from "../../api/agent";
 import { router } from "../../router/Routes";
 import { setBasket } from "./basketSlice";
 import { User } from "../../models/user";
-import { AxiosError, AxiosResponse } from "axios";
 
 export interface AccountState {
   user: User | null;
@@ -15,8 +14,8 @@ const initialState: AccountState = {
   user: null,
 };
 
-export const signInUser = createAsyncThunk<User, FieldValues>(
-  "account/signInUser",
+export const loginAsync = createAsyncThunk<User, FieldValues>(
+  "account/login",
   async (data, thunkAPI) => {
     try {
       const userDto = await agent.Account.login(data);
@@ -25,9 +24,7 @@ export const signInUser = createAsyncThunk<User, FieldValues>(
       localStorage.setItem("user", JSON.stringify(user));
       return user;
     } catch (error: unknown) {
-      const axiosError = error as AxiosError;
-      const { data } = axiosError.response as AxiosResponse;
-      return thunkAPI.rejectWithValue(data);
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -43,9 +40,7 @@ export const fetchCurrentUser = createAsyncThunk<User>(
       localStorage.setItem("user", JSON.stringify(user));
       return user;
     } catch (error: unknown) {
-      const axiosError = error as AxiosError;
-      const { data } = axiosError.response as AxiosResponse;
-      return thunkAPI.rejectWithValue(data);
+      return thunkAPI.rejectWithValue(error);
     }
   },
   {
@@ -78,11 +73,11 @@ export const accountSlice = createSlice({
     builder.addCase(fetchCurrentUser.rejected, (state) => {
       state.user = null;
       localStorage.removeItem("user");
-      toast.error("Session expired - please login again");
+      toast.error("Sesión expirada - Inicia sesión de nuevo.");
       router.navigate("/");
     });
     builder.addMatcher(
-      isAnyOf(signInUser.fulfilled, fetchCurrentUser.fulfilled),
+      isAnyOf(loginAsync.fulfilled, fetchCurrentUser.fulfilled),
       (state, action) => {
         const claims = JSON.parse(atob(action.payload.token.split(".")[1]));
         const roles =
@@ -95,7 +90,7 @@ export const accountSlice = createSlice({
         };
       }
     );
-    builder.addMatcher(isAnyOf(signInUser.rejected), (_state, action) => {
+    builder.addMatcher(isAnyOf(loginAsync.rejected), (_state, action) => {
       throw action.payload;
     });
   },

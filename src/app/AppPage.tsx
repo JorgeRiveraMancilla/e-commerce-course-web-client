@@ -45,6 +45,8 @@ export const AppPage = () => {
     setDarkMode(!darkMode);
   };
 
+  if (loading) return <Loading message="Inicializando la aplicación..." />;
+
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
@@ -56,13 +58,9 @@ export const AppPage = () => {
         handleThemeChange={() => handleSwitchTheme()}
       />
 
-      {loading ? (
-        <Loading message="Inicializando la aplicación..." />
-      ) : (
-        <Container sx={{ mt: 4 }}>
-          <Outlet />
-        </Container>
-      )}
+      <Container sx={{ mt: 4 }}>
+        <Outlet />
+      </Container>
     </ThemeProvider>
   );
 };

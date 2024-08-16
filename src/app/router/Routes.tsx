@@ -10,17 +10,25 @@ import { ServerErrorPage } from "../pages/server-error/ServerErrorPage";
 import { NotFoundPage } from "../pages/not-found/NotFoundPage";
 import { ProfilePage } from "../pages/profile/ProfilePage";
 import { ProductDetailsPage } from "../pages/catalog/pages/product-details/ProductDetailsPage";
+import { CheckoutPage } from "../pages/checkout/CheckoutPage";
+import { RequireAuth } from "./RequireAuth";
+import { BasketPage } from "../pages/basket/BasketPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <AppPage />,
     children: [
+      {
+        element: <RequireAuth />,
+        children: [{ path: "/checkout", element: <CheckoutPage /> }],
+      },
       { path: "/", element: <HomePage /> },
       { path: "/catalog", element: <CatalogPage /> },
       { path: "/catalog/:id", element: <ProductDetailsPage /> },
       { path: "/about", element: <AboutPage /> },
       { path: "/contact", element: <ContactPage /> },
+      { path: "/basket", element: <BasketPage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },
       { path: "/server-error", element: <ServerErrorPage /> },

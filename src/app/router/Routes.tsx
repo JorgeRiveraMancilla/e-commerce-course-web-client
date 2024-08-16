@@ -8,6 +8,7 @@ import { ContactPage } from "../pages/contact/ContactPage";
 import { HomePage } from "../pages/home/HomePage";
 import { ServerErrorPage } from "../pages/server-error/ServerErrorPage";
 import { NotFoundPage } from "../pages/not-found/NotFoundPage";
+import { ProfilePage } from "../pages/profile/ProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ export const router = createBrowserRouter([
       { path: "/register", element: <RegisterPage /> },
       { path: "/server-error", element: <ServerErrorPage /> },
       { path: "/not-found", element: <NotFoundPage /> },
+      { path: "/profile", element: <ProfilePage /> },
       { path: "/*", element: <Navigate replace to="/not-found" /> },
     ],
   },

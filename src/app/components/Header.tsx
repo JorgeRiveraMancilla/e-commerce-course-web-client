@@ -12,9 +12,11 @@ import MenuItem from "@mui/material/MenuItem";
 import StoreIcon from "@mui/icons-material/Store";
 import { useState, MouseEvent } from "react";
 import { Badge, Switch } from "@mui/material";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ShoppingCart } from "@mui/icons-material";
-import { useAppSelector } from "../store/configureStore";
+import { useAppDispatch, useAppSelector } from "../store/configureStore";
+import { logout } from "../store/slices/accountSlice";
+import { clearBasket } from "../store/slices/basketSlice";
 
 const mainTitle = "E-COMMERCE";
 const leftLinks = [
@@ -26,7 +28,6 @@ const rightLinks = [
   { title: "Iniciar sesión", path: "/login" },
   { title: "Registrarse", path: "/register" },
 ];
-const settings = ["Perfil", "Cerrar sesión"];
 const linkStyles = {
   color: "inherit",
   my: 2,
@@ -47,13 +48,15 @@ interface Props {
 export const Header = ({ handleThemeChange, darkMode }: Props) => {
   const { basket } = useAppSelector((state) => state.basket);
   const { user } = useAppSelector((state) => state.account);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const itemCount = basket?.items?.reduce(
     (sum, item) => sum + item.quantity,
     0
   );
 
-  const [anchorUserMenu, setAnchorUserMenu] = useState<null | HTMLElement>(
+  const [anchorUserMenu, setAnchorUserMenu] = useState<HTMLElement | null>(
     null
   );
 
@@ -62,6 +65,17 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
   };
 
   const handleCloseUserMenu = () => {
+    setAnchorUserMenu(null);
+  };
+
+  const handleClickProfile = () => {
+    navigate("/profile");
+    setAnchorUserMenu(null);
+  };
+
+  const handleClickLogout = () => {
+    dispatch(logout());
+    dispatch(clearBasket());
     setAnchorUserMenu(null);
   };
 
@@ -139,11 +153,13 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
                 open={Boolean(anchorUserMenu)}
                 onClose={() => handleCloseUserMenu()}
               >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={() => handleCloseUserMenu()}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={() => handleClickProfile()}>
+                  <Typography textAlign="center">Perfil</Typography>
+                </MenuItem>
+
+                <MenuItem onClick={() => handleClickLogout()}>
+                  <Typography textAlign="center">Cerrar sesión</Typography>
+                </MenuItem>
               </Menu>
             </Box>
           ) : (

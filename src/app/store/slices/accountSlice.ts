@@ -54,7 +54,7 @@ export const accountSlice = createSlice({
   name: "account",
   initialState,
   reducers: {
-    signOut: (state) => {
+    logout: (state) => {
       state.user = null;
       localStorage.removeItem("user");
       router.navigate("/");
@@ -96,4 +96,4 @@ export const accountSlice = createSlice({
   },
 });
 
-export const { signOut, setUser } = accountSlice.actions;
+export const { logout, setUser } = accountSlice.actions;

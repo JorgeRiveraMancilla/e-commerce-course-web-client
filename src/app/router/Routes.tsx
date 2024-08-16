@@ -9,6 +9,7 @@ import { HomePage } from "../pages/home/HomePage";
 import { ServerErrorPage } from "../pages/server-error/ServerErrorPage";
 import { NotFoundPage } from "../pages/not-found/NotFoundPage";
 import { ProfilePage } from "../pages/profile/ProfilePage";
+import { ProductDetailsPage } from "../pages/catalog/pages/product-details/ProductDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/catalog", element: <CatalogPage /> },
+      { path: "/catalog/:id", element: <ProductDetailsPage /> },
       { path: "/about", element: <AboutPage /> },
       { path: "/contact", element: <ContactPage /> },
       { path: "/login", element: <LoginPage /> },

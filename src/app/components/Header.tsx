@@ -79,6 +79,11 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
     setAnchorUserMenu(null);
   };
 
+  const handleClickOrders = () => {
+    navigate("/order");
+    setAnchorUserMenu(null);
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -155,6 +160,10 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
               >
                 <MenuItem onClick={() => handleClickProfile()}>
                   <Typography textAlign="center">Perfil</Typography>
+                </MenuItem>
+
+                <MenuItem onClick={() => handleClickOrders()}>
+                  <Typography textAlign="center">Mis pedidos</Typography>
                 </MenuItem>
 
                 <MenuItem onClick={() => handleClickLogout()}>

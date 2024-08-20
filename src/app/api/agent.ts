@@ -95,10 +95,17 @@ const Account = {
   getAddress: () => requests.get("account/savedAddress"),
 };
 
+const Order = {
+  getAll: () => requests.get("order"),
+  getOne: (id: number) => requests.get(`order/${id}`),
+  create: (values: object) => requests.post("order", values),
+};
+
 const agent = {
-  Product: Product,
+  Product,
   Basket,
   Account,
+  Order,
 };
 
 export default agent;

@@ -71,7 +71,7 @@ export const ProductDetailsPage = () => {
   }
 
   if (productStatus.includes("pending"))
-    return <Loading message="Loading product..." />;
+    return <Loading message="Cargando el producto..." />;
 
   if (!product) return <NotFoundPage />;
 

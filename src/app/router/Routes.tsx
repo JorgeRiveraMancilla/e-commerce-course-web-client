@@ -13,6 +13,7 @@ import { ProductDetailsPage } from "../pages/catalog/pages/product-details/Produ
 import { CheckoutPage } from "../pages/checkout/CheckoutPage";
 import { RequireAuth } from "./RequireAuth";
 import { BasketPage } from "../pages/basket/BasketPage";
+import { OrderPage } from "../pages/order/OrderPage";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +22,10 @@ export const router = createBrowserRouter([
     children: [
       {
         element: <RequireAuth />,
-        children: [{ path: "/checkout", element: <CheckoutPage /> }],
+        children: [
+          { path: "/checkout", element: <CheckoutPage /> },
+          { path: "/order", element: <OrderPage /> },
+        ],
       },
       { path: "/", element: <HomePage /> },
       { path: "/catalog", element: <CatalogPage /> },

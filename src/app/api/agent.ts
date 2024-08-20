@@ -91,8 +91,8 @@ const Basket = {
 const Account = {
   login: (values: object) => requests.post("account/login", values),
   register: (values: object) => requests.post("account/register", values),
-  currentUser: () => requests.get("account/current-user"),
-  fetchAddress: () => requests.get("account/savedAddress"),
+  getCurrentUser: () => requests.get("account/current-user"),
+  getAddress: () => requests.get("account/savedAddress"),
 };
 
 const agent = {

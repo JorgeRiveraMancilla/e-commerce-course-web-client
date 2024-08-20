@@ -34,7 +34,7 @@ export const fetchCurrentUser = createAsyncThunk<User>(
   async (_, thunkAPI) => {
     thunkAPI.dispatch(setUser(JSON.parse(localStorage.getItem("user")!)));
     try {
-      const userDto = await agent.Account.currentUser();
+      const userDto = await agent.Account.getCurrentUser();
       const { basket, ...user } = userDto;
       if (basket) thunkAPI.dispatch(setBasket(basket));
       localStorage.setItem("user", JSON.stringify(user));

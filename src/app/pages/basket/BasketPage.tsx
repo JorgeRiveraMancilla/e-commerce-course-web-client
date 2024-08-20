@@ -38,7 +38,12 @@ export const BasketPage = () => {
 
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          mb: 4,
+        }}
+      >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -143,11 +148,11 @@ export const BasketPage = () => {
 
         <Grid item xs={6}>
           <TableContainer
-            sx={{
-              my: 4,
-            }}
             component={Paper}
             variant={"outlined"}
+            sx={{
+              mb: 4,
+            }}
           >
             <Table>
               <TableBody>
@@ -192,6 +197,9 @@ export const BasketPage = () => {
             variant="contained"
             size="large"
             fullWidth
+            sx={{
+              mb: 4,
+            }}
           >
             Comprar
           </Button>

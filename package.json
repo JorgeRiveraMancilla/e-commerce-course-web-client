@@ -28,6 +28,7 @@
     "react-router-dom": "^6.26.0",
     "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
+    "vite-plugin-vercel": "^9.0.1",
     "yup": "^1.4.0"
   },
   "devDependencies": {

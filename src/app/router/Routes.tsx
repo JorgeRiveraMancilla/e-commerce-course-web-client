@@ -10,10 +10,10 @@ import { ServerErrorPage } from "../pages/server-error/ServerErrorPage";
 import { NotFoundPage } from "../pages/not-found/NotFoundPage";
 import { ProfilePage } from "../pages/profile/ProfilePage";
 import { ProductDetailsPage } from "../pages/catalog/pages/product-details/ProductDetailsPage";
-import { CheckoutPage } from "../pages/checkout/CheckoutPage";
 import { RequireAuth } from "./RequireAuth";
 import { BasketPage } from "../pages/basket/BasketPage";
 import { OrderPage } from "../pages/order/OrderPage";
+import { CheckoutPage } from "../pages/checkout/CheckoutPage";
 
 export const router = createBrowserRouter([
   {

@@ -1,6 +1,7 @@
-import { Typography, Grid, Checkbox, FormControlLabel } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import { useFormContext } from "react-hook-form";
 import { AppTextInput } from "../../../components/AppTextInput";
+import { AppCheckbox } from "../../../components/AppCheckbox";
 
 export const AddressForm = () => {
   const { control, formState } = useFormContext();
@@ -50,10 +51,11 @@ export const AddressForm = () => {
       </Grid>
 
       <Grid item xs={12}>
-        <FormControlLabel
-          control={<Checkbox color="secondary" disabled={!formState.isDirty} />}
+        <AppCheckbox
+          disabled={!formState.isDirty}
           name="saveAddress"
-          label="Guardar como dirección de entrega predeterminada."
+          label="Save this as default address"
+          control={control}
         />
       </Grid>
     </>

@@ -140,8 +140,8 @@ export const Checkout = () => {
 
       if (paymentResult.paymentIntent?.status === "succeeded") {
         const orderNumber = await agent.Order.create({
-          saveAddress,
-          shippingAddress,
+          saveAddress: saveAddress,
+          address: shippingAddress,
         });
         setOrderNumber(orderNumber);
         setPaymentSucceeded(true);
@@ -168,6 +168,7 @@ export const Checkout = () => {
       setActiveStep(activeStep + 1);
     }
   };
+
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };

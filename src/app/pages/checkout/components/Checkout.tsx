@@ -145,12 +145,12 @@ export const Checkout = () => {
         });
         setOrderNumber(orderNumber);
         setPaymentSucceeded(true);
-        setPaymentMessage("Thank you - we have received your payment");
+        setPaymentMessage("Gracias - hemos recibido tu pago");
         setActiveStep(activeStep + 1);
         dispatch(clearBasket());
         setLoading(false);
       } else {
-        setPaymentMessage(paymentResult.error?.message || "Payment failed");
+        setPaymentMessage(paymentResult.error?.message || "Error en el pago");
         setPaymentSucceeded(false);
         setLoading(false);
         setActiveStep(activeStep + 1);

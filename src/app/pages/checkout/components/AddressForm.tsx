@@ -54,7 +54,7 @@ export const AddressForm = () => {
         <AppCheckbox
           disabled={!formState.isDirty}
           name="saveAddress"
-          label="Save this as default address"
+          label="Guardar esta dirección para futuras compras"
           control={control}
         />
       </Grid>

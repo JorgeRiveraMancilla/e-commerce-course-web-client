@@ -7,7 +7,10 @@ export interface Order {
   subtotal: number;
   deliveryFee: number;
   total: number;
-  orderStatus: string;
+  orderStatus: {
+    id: number;
+    name: string;
+  };
   address: Address;
   orderItems: OrderItem[];
 }

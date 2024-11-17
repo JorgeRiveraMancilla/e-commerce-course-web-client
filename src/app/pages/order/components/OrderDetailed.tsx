@@ -14,6 +14,19 @@ import {
 import { Order } from "../../../models/order";
 import { formatChileanCurrency } from "../../../utils/util";
 
+const translateOrderStatusText = (text: string) => {
+  switch (text) {
+    case "Pending":
+      return "Pendiente";
+    case "PaymentReceived":
+      return "Pago recibido";
+    case "PaymentFailed":
+      return "Pago fallido";
+    default:
+      return text;
+  }
+};
+
 interface Props {
   order: Order;
   setSelectedOrder: (id: number) => void;
@@ -32,7 +45,8 @@ export const OrderDetailed = ({ order, setSelectedOrder }: Props) => {
     <>
       <Box display="flex" justifyContent="space-between">
         <Typography sx={{ p: 2 }} gutterBottom variant="h4">
-          Pedido # {order.id} - {order.orderStatus}
+          Pedido # {order.id} -{" "}
+          {translateOrderStatusText(order.orderStatus.name)}
         </Typography>
 
         <Button
@@ -45,7 +59,12 @@ export const OrderDetailed = ({ order, setSelectedOrder }: Props) => {
         </Button>
       </Box>
 
-      <TableContainer component={Paper}>
+      <TableContainer
+        component={Paper}
+        sx={{
+          mb: 4,
+        }}
+      >
         <Table sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow>
@@ -95,7 +114,13 @@ export const OrderDetailed = ({ order, setSelectedOrder }: Props) => {
         <Grid item xs={6} />
 
         <Grid item xs={6}>
-          <TableContainer component={Paper} variant={"outlined"}>
+          <TableContainer
+            component={Paper}
+            variant={"outlined"}
+            sx={{
+              mb: 4,
+            }}
+          >
             <Table>
               <TableBody>
                 <TableRow>

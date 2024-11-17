@@ -81,7 +81,7 @@ export const OrderPage = () => {
                   {order.orderDate.toString().split("T")[0]}
                 </TableCell>
                 <TableCell align="right">
-                  {translateOrderStatusText(order.orderStatus)}
+                  {translateOrderStatusText(order.orderStatus.name)}
                 </TableCell>
                 <TableCell align="right">
                   <Button onClick={() => setSelectedOrderNumber(order.id)}>

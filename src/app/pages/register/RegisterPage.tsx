@@ -43,6 +43,7 @@ export const RegisterPage = () => {
       .catch((error) => handleApiErrors(error));
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleApiErrors = (errors: any) => {
     console.log(errors);
     if (errors) {

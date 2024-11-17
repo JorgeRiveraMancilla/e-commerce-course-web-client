@@ -171,6 +171,8 @@ export const {
   resetProductParams,
   setMetaData,
   setPageNumber,
+  setProduct,
+  removeProduct,
 } = productSlice.actions;
 
 export const productSelectors = productsAdapter.getSelectors(

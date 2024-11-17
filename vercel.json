@@ -1,9 +1,9 @@
 {
-    "builds": [
-      {
-        "src": "package.json",
-        "use": "@vercel/node",
-        "config": { "installCommand": "npm run vercel-install" }
-      }
-    ]
-  }
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": { "buildCommand": "npm run build" }
+    }
+  ]
+}

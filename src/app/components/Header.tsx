@@ -30,7 +30,6 @@ const rightLinks = [
 ];
 const linkStyles = {
   color: "inherit",
-  my: 2,
   textDecoration: "none",
   "&.active": {
     color: "text.secondary",
@@ -68,10 +67,10 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
     setAnchorUserMenu(null);
   };
 
-  const handleClickProfile = () => {
-    navigate("/profile");
-    setAnchorUserMenu(null);
-  };
+  // const handleClickProfile = () => {
+  //   navigate("/profile");
+  //   setAnchorUserMenu(null);
+  // };
 
   const handleClickLogout = () => {
     dispatch(logout());
@@ -83,6 +82,8 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
     navigate("/order");
     setAnchorUserMenu(null);
   };
+
+  const adminLink = { title: "Inventario", path: "/inventory" };
 
   return (
     <AppBar position="static">
@@ -115,6 +116,11 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
                 {title}
               </Button>
             ))}
+            {user && user.roles?.includes("Admin") && (
+              <Button component={NavLink} to={adminLink.path} sx={linkStyles}>
+                {adminLink.title}
+              </Button>
+            )}
           </Box>
 
           <IconButton
@@ -158,9 +164,9 @@ export const Header = ({ handleThemeChange, darkMode }: Props) => {
                 open={Boolean(anchorUserMenu)}
                 onClose={() => handleCloseUserMenu()}
               >
-                <MenuItem onClick={() => handleClickProfile()}>
+                {/* <MenuItem onClick={() => handleClickProfile()}>
                   <Typography textAlign="center">Perfil</Typography>
-                </MenuItem>
+                </MenuItem> */}
 
                 <MenuItem onClick={() => handleClickOrders()}>
                   <Typography textAlign="center">Mis pedidos</Typography>

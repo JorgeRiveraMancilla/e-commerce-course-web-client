@@ -7,6 +7,7 @@ import {
   TableCell,
   TableBody,
   Button,
+  Typography,
 } from "@mui/material";
 import { useState, useEffect } from "react";
 import agent from "../../api/agent";
@@ -57,46 +58,47 @@ export const OrderPage = () => {
         <TableHead>
           <TableRow>
             <TableCell>Número del pedido</TableCell>
-
             <TableCell align="right">Total</TableCell>
-
             <TableCell align="right">Fecha</TableCell>
-
             <TableCell align="right">Estado</TableCell>
-
             <TableCell align="right" />
           </TableRow>
         </TableHead>
-
         <TableBody>
-          {orders?.map((order) => (
-            <TableRow
-              key={order.id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {order.id}
-              </TableCell>
-
-              <TableCell align="right">
-                {formatChileanCurrency(order.total)}
-              </TableCell>
-
-              <TableCell align="right">
-                {order.orderDate.toString().split("T")[0]}
-              </TableCell>
-
-              <TableCell align="right">
-                {translateOrderStatusText(order.orderStatus)}
-              </TableCell>
-
-              <TableCell align="right">
-                <Button onClick={() => setSelectedOrderNumber(order.id)}>
-                  Ver
-                </Button>
+          {orders && orders.length > 0 ? (
+            orders.map((order) => (
+              <TableRow
+                key={order.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row">
+                  {order.id}
+                </TableCell>
+                <TableCell align="right">
+                  {formatChileanCurrency(order.total)}
+                </TableCell>
+                <TableCell align="right">
+                  {order.orderDate.toString().split("T")[0]}
+                </TableCell>
+                <TableCell align="right">
+                  {translateOrderStatusText(order.orderStatus)}
+                </TableCell>
+                <TableCell align="right">
+                  <Button onClick={() => setSelectedOrderNumber(order.id)}>
+                    Ver
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={5} align="center">
+                <Typography variant="body1">
+                  No hay órdenes de compra
+                </Typography>
               </TableCell>
             </TableRow>
-          ))}
+          )}
         </TableBody>
       </Table>
     </TableContainer>

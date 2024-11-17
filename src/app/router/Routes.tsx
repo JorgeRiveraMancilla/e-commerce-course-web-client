@@ -5,15 +5,15 @@ import { AboutPage } from "../pages/about/AboutPage";
 import { LoginPage } from "../pages/login/LoginPage";
 import { RegisterPage } from "../pages/register/RegisterPage";
 import { ContactPage } from "../pages/contact/ContactPage";
-import { HomePage } from "../pages/home/HomePage";
 import { ServerErrorPage } from "../pages/server-error/ServerErrorPage";
 import { NotFoundPage } from "../pages/not-found/NotFoundPage";
-import { ProfilePage } from "../pages/profile/ProfilePage";
+// import { ProfilePage } from "../pages/profile/ProfilePage";
 import { ProductDetailsPage } from "../pages/catalog/pages/product-details/ProductDetailsPage";
 import { RequireAuth } from "./RequireAuth";
 import { BasketPage } from "../pages/basket/BasketPage";
 import { OrderPage } from "../pages/order/OrderPage";
 import { CheckoutPage } from "../pages/checkout/CheckoutPage";
+import { InventoryPage } from "../pages/inventory/InventoryPage";
 
 export const router = createBrowserRouter([
   {
@@ -27,7 +27,10 @@ export const router = createBrowserRouter([
           { path: "/order", element: <OrderPage /> },
         ],
       },
-      { path: "/", element: <HomePage /> },
+      {
+        element: <RequireAuth roles={["Admin"]} />,
+        children: [{ path: "/inventory", element: <InventoryPage /> }],
+      },
       { path: "/catalog", element: <CatalogPage /> },
       { path: "/catalog/:id", element: <ProductDetailsPage /> },
       { path: "/about", element: <AboutPage /> },
@@ -37,7 +40,7 @@ export const router = createBrowserRouter([
       { path: "/register", element: <RegisterPage /> },
       { path: "/server-error", element: <ServerErrorPage /> },
       { path: "/not-found", element: <NotFoundPage /> },
-      { path: "/profile", element: <ProfilePage /> },
+      // { path: "/profile", element: <ProfilePage /> },
       { path: "/*", element: <Navigate replace to="/not-found" /> },
     ],
   },

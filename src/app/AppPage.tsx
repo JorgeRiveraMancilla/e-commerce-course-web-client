@@ -2,21 +2,24 @@ import {
   Container,
   CssBaseline,
   ThemeProvider,
+  Box,
   createTheme,
 } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { HomePage } from "./pages/home/HomePage";
 import { useAppDispatch } from "./store/configureStore";
 import { fetchCurrentUser } from "./store/slices/accountSlice";
 import { fetchBasketAsync } from "./store/slices/basketSlice";
 import { Loading } from "./components/Loading";
-import { Header } from "./components/Header";
-import "react-toastify/dist/ReactToastify.css";
 
 export const AppPage = () => {
+  const location = useLocation();
   const dispatch = useAppDispatch();
-  const [darkMode, setDarkMode] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const initApp = useCallback(async () => {
@@ -32,35 +35,42 @@ export const AppPage = () => {
     initApp().then(() => setLoading(false));
   }, [initApp]);
 
+  const [darkMode, setDarkMode] = useState(false);
+  const palleteType = darkMode ? "dark" : "light";
   const theme = createTheme({
     palette: {
-      mode: darkMode ? "dark" : "light",
+      mode: palleteType,
       background: {
-        default: !darkMode ? "#eaeaea" : "#121212",
+        default: palleteType === "light" ? "#eaeaea" : "#121212",
       },
     },
   });
 
-  const handleSwitchTheme = () => {
+  function handleThemeChange() {
     setDarkMode(!darkMode);
-  };
-
-  if (loading) return <Loading message="Inicializando la aplicación..." />;
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
-
       <CssBaseline />
-
-      <Header
-        darkMode={darkMode}
-        handleThemeChange={() => handleSwitchTheme()}
-      />
-
-      <Container sx={{ mt: 4 }}>
-        <Outlet />
-      </Container>
+      <Box
+        sx={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      >
+        <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
+        <Box component="main" sx={{ flexGrow: 1 }}>
+          {loading ? (
+            <Loading message="Inicializando la aplicación..." />
+          ) : location.pathname === "/" ? (
+            <HomePage />
+          ) : (
+            <Container sx={{ mt: 4 }}>
+              <Outlet />
+            </Container>
+          )}
+        </Box>
+        <Footer />
+      </Box>
     </ThemeProvider>
   );
 };

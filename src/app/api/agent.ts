@@ -72,6 +72,18 @@ const requests = {
   post: (url: string, body: object) => axios.post(url, body).then(responseBody),
   put: (url: string, body: object) => axios.put(url, body).then(responseBody),
   del: (url: string) => axios.delete(url).then(responseBody),
+  postForm: (url: string, data: FormData) =>
+    axios
+      .post(url, data, {
+        headers: { "Content-type": "multipart/form-data" },
+      })
+      .then(responseBody),
+  putForm: (url: string, data: FormData) =>
+    axios
+      .put(url, data, {
+        headers: { "Content-type": "multipart/form-data" },
+      })
+      .then(responseBody),
 };
 
 const Product = {
@@ -105,12 +117,33 @@ const Payment = {
   create: () => requests.post("payment", {}),
 };
 
+interface ProductFormData {
+  [key: string]: string | Blob;
+}
+
+function createFormData(item: ProductFormData) {
+  const formData = new FormData();
+  for (const key in item) {
+    formData.append(key, item[key]);
+  }
+  return formData;
+}
+
+const Admin = {
+  createProduct: (product: ProductFormData) =>
+    requests.postForm("products", createFormData(product)),
+  updateProduct: (product: ProductFormData) =>
+    requests.putForm("products", createFormData(product)),
+  deleteProduct: (id: number) => requests.del(`products/${id}`),
+};
+
 const agent = {
   Product,
   Basket,
   Account,
   Order,
   Payment,
+  Admin,
 };
 
 export default agent;

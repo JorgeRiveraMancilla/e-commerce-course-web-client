@@ -1,30 +1,75 @@
-# React + TypeScript + Vite
+# E-Commerce Course Web Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is an E-Commerce Web Client built with React that integrates with Material-UI (MUI) for UI components and includes features like payment processing with Stripe.
 
-Currently, two official plugins are available:
+This project is based on the Udemy course [Learn to Build an e-Commerce Store with .NET, React & Redux](https://www.udemy.com/course/learn-to-build-an-e-commerce-store-with-dotnet-react-redux) by Neil Cummings.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies & Features
 
-## Expanding the ESLint configuration
+- **Framework**: 
+  - React 18.3.1
+  - Vite 5.4.10 (Build tool)
+- **UI Components & Styling**:
+  - Material-UI (MUI) 5.16.7
+  - MUI Icons & Lab components
+  - Emotion for styled components
+- **State Management & Forms**:
+  - Redux 5.0.1
+  - Redux Toolkit 2.2.7
+  - React Hook Form 7.52.2
+  - Yup 1.4.0 for validation
+- **Payment Processing**:
+  - Stripe.js 4.3.0
+  - React Stripe.js 2.8.0
+- **Additional Features**:
+  - React Router 6.26.0 for routing
+  - Axios 1.7.3 for API requests
+  - React Dropzone 14.3.5 for file uploads
+  - React Slick 0.30.2 for carousels
+  - React Toastify 10.0.6 for notifications
+- **Development Tools**:
+  - TypeScript 5.6.2
+  - ESLint 9.13.0
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Prerequisites
 
-- Configure the top-level `parserOptions` property like this:
+Before you begin, ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v18.x or higher)
+- [npm](https://www.npmjs.com/) (v8.x or higher)
+- [Git](https://git-scm.com/downloads)
+- [Visual Studio Code](https://code.visualstudio.com/) or preferred IDE
+- [Backend API](https://github.com/JorgeRiveraMancilla/e-commerce-course-api)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Getting Started
+
+Follow these steps to get the project up and running on your local machine:
+
+### 1. Clone the Repository
+
+```bash
+# Clone the project
+git clone https://github.com/JorgeRiveraMancilla/e-commerce-course-web-client.git
+
+# Navigate to the project directory
+cd e-commerce-course-web-client
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the Development Server
+
+```bash
+npm run dev
+```
+
+The application will be available at:
+- `http://localhost:5173`
+
+## Backend Requirements
+
+This application requires the E-Commerce Course API to be running. You can find the backend repository here:
+[E-Commerce Course API](https://github.com/JorgeRiveraMancilla/e-commerce-course-api)

@@ -6,7 +6,7 @@ This project is based on the Udemy course [Learn to Build an e-Commerce Store wi
 
 ## Technologies & Features
 
-- **Framework**: 
+- **Framework**:
   - React 18.3.1
   - Vite 5.4.10 (Build tool)
 - **UI Components & Styling**:
@@ -34,6 +34,7 @@ This project is based on the Udemy course [Learn to Build an e-Commerce Store wi
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
+
 - [Node.js](https://nodejs.org/) (v18.x or higher)
 - [npm](https://www.npmjs.com/) (v8.x or higher)
 - [Git](https://git-scm.com/downloads)
@@ -67,6 +68,7 @@ npm run dev
 ```
 
 The application will be available at:
+
 - `http://localhost:5173`
 
 ## Backend Requirements

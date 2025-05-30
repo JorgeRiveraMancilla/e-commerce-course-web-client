@@ -27,7 +27,7 @@ export const ContactPage = () => {
               Jorge Rivera Mancilla
             </Typography>
             <Typography variant="h6" color="text.secondary" gutterBottom>
-              Data Engineer en CoreDevX | Profesor UCN
+              Ingeniero de Software
             </Typography>
             <Typography variant="body1" paragraph>
               Antofagasta, Chile
@@ -48,15 +48,6 @@ export const ContactPage = () => {
                 <LinkedInIcon fontSize="large" />
               </Link>
             </Box>
-            <Typography variant="h6" gutterBottom>
-              Aspiraciones Profesionales
-            </Typography>
-            <Typography variant="body1" paragraph>
-              He participado en roles como Software Engineer, Data Engineer y
-              Generative AI Engineer. Mi objetivo es aplicar mis habilidades en
-              programación, análisis de datos y tecnologías de GenAI para
-              contribuir al desarrollo de soluciones innovadoras y eficientes.
-            </Typography>
           </Grid>
         </Grid>
       </Paper>
